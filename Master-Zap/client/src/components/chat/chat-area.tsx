@@ -1,6 +1,7 @@
 import { useEffect, useRef } from "react";
 import { useContact } from "@/hooks/use-contacts";
 import { useMessages } from "@/hooks/use-messages";
+import { useCitations } from "@/hooks/use-citations";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -15,7 +16,9 @@ interface ChatAreaProps {
 export function ChatArea({ contactId, onBack }: ChatAreaProps) {
   const { data: contact, isLoading: isLoadingContact } = useContact(contactId);
   const { data: messages, isLoading: isLoadingMessages } = useMessages(contactId);
+  const { data: citations } = useCitations();
   const scrollRef = useRef<HTMLDivElement>(null);
+  const contactCitations = (citations ?? []).filter((c: any) => c.name === contact?.name);
 
   // Auto-scroll to bottom when messages load
   useEffect(() => {
@@ -105,6 +108,19 @@ export function ChatArea({ contactId, onBack }: ChatAreaProps) {
         {isLoadingMessages ? (
           <div className="flex justify-center my-4">
             <Loader2 className="h-6 w-6 animate-spin text-muted-foreground" />
+          </div>
+        ) : messages && messages.length === 0 ? (
+          <div className="flex flex-col items-center gap-3 mt-6 px-4 text-center text-[13px] text-[#54656f]" data-testid="empty-chat">
+            <div className="bg-white rounded-lg shadow-sm px-4 py-3 max-w-md">
+              Nenhuma mensagem com este contato foi divulgada publicamente. Ele aparece apenas
+              como nome na agenda ou em menções de reportagens.
+            </div>
+            {contactCitations.map((c: any) => (
+              <div key={c.id} className="bg-white rounded-lg shadow-sm px-4 py-3 max-w-md text-left">
+                <div className="text-[#111b21]">{c.context}</div>
+                <div className="mt-1 text-[11px] text-[#667781]">Fonte: {c.source}</div>
+              </div>
+            ))}
           </div>
         ) : (
           <div className="flex flex-col gap-1.5 pb-2">

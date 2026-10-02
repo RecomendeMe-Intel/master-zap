@@ -11,6 +11,9 @@
     "db:push": "drizzle-kit push"
   },
   "dependencies": {
+    "@capacitor/android": "^8.5.2",
+    "@capacitor/core": "^8.5.2",
+    "@fontsource-variable/inter": "^5.3.0",
     "@hookform/resolvers": "^3.10.0",
     "@jridgewell/trace-mapping": "^0.3.25",
     "@radix-ui/react-accordion": "^1.2.4",
@@ -78,6 +81,7 @@
     "zod-validation-error": "^3.4.0"
   },
   "devDependencies": {
+    "@capacitor/cli": "^8.5.2",
     "@replit/vite-plugin-cartographer": "^0.4.4",
     "@replit/vite-plugin-dev-banner": "^0.1.1",
     "@replit/vite-plugin-runtime-error-modal": "^0.0.3",

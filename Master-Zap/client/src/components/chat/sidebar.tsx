@@ -4,6 +4,7 @@ import { Search, Network, BookMarked, Info, Loader2 } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { initialsAvatar } from "@/lib/local-avatar";
 import { clsx } from "clsx";
 
 interface SidebarProps {
@@ -28,7 +29,7 @@ export function Sidebar({ selectedContactId, onSelectContact, onOpenGraph, onOpe
       <div className="h-[59px] bg-[hsl(var(--wa-header-bg))] flex items-center justify-between px-4 shrink-0">
         <div className="flex items-center gap-3">
           <Avatar className="h-10 w-10 border border-gray-200">
-            <AvatarImage src="https://ui-avatars.com/api/?name=Master+Zap&background=075E54&color=fff" />
+            <AvatarImage src={initialsAvatar("Master Zap")} />
             <AvatarFallback>MZ</AvatarFallback>
           </Avatar>
           <span className="font-semibold text-foreground text-sm truncate max-w-[120px]" title="MasterZap - Caso Vorcaro">

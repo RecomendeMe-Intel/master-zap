@@ -1,4 +1,5 @@
 import { useEffect, useRef } from "react";
+import { initialsAvatar } from "@/lib/local-avatar";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { Network } from "vis-network";
 import { DataSet } from "vis-data";
@@ -20,12 +21,12 @@ export function GraphModal({ open, onOpenChange }: GraphModalProps) {
 
     // Build Graph Data
     const nodes = new DataSet([
-      { id: 0, label: "Daniel Vorcaro", shape: "circularImage", image: "https://api.dicebear.com/7.x/bottts/svg?seed=vorcaro", size: 40, font: { bold: true } },
+      { id: 0, label: "Daniel Vorcaro", shape: "circularImage", image: initialsAvatar("Daniel Vorcaro", "b91c1c"), size: 40, font: { bold: true } },
       ...contacts.map((c: any) => ({
         id: c.id,
         label: c.name,
         shape: "circularImage",
-        image: c.avatar || `https://ui-avatars.com/api/?name=${encodeURIComponent(c.name)}`,
+        image: c.avatar || initialsAvatar(c.name),
         size: 25,
       }))
     ]);
